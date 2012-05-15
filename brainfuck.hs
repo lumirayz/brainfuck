@@ -3,6 +3,8 @@ import Control.Monad.State
 
 import Data.Char
 
+import System.Environment
+
 data Tape = Tape [Int] Int [Int] deriving (Show)
 
 data Brainfuck = Brainfuck
@@ -68,3 +70,6 @@ skipToBrace [] = runString []
 
 run :: String -> IO ()
 run s = runStateT (runString s) (Brainfuck (Tape [] 0 []) []) >> return ()
+
+main :: IO ()
+main = getArgs >>= mapM_ (\f -> readFile f >>= run)
