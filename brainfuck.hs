@@ -58,6 +58,7 @@ runString (',':s) = do
 	c <- liftIO getChar
 	modifyTape (setTapeValue (ord c))
 	runString s
+runString (_:s) = runString s
 runString "" = return ()
 
 skipToBrace :: String -> BrainfuckM ()
